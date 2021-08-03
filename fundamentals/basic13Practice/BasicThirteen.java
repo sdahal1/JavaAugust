@@ -68,6 +68,7 @@ public class BasicThirteen {
     //Print even numbers between 1-50
     public static void evenNums(){
         for(int i = 2; i<=50; i+=2){
+            System.out.println(i);
         }
     }
 

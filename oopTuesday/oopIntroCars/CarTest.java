@@ -8,6 +8,9 @@ public class CarTest {
         Car usedCar = new Car("Honda", "Civic", 10000);
         Car basicCar = new Car();
 
+
+        System.out.println("Total cars created thus far: " + Car.getTotalCars());
+
         System.out.println(car1.getMileage());
         System.out.println(car2.getMileage());
         System.out.println(car3.getMileage());

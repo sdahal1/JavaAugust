@@ -3,6 +3,7 @@ public class Car {
     private String make;
     private String model;
     private int mileage;
+    private static int totalCars = 0;
 
 
 
@@ -12,6 +13,8 @@ public class Car {
         this.make = makeInput;
         this.model = modelInput;
         this.mileage = 0;
+        totalCars+=1;
+
     }
 
     //constructor overloading. when using this constructors, it will require more pieces of information
@@ -19,6 +22,8 @@ public class Car {
         this.make = makeInput;
         this.model = modelInput;
         this.mileage = mileageInput;
+        totalCars+=1;
+
     }
 
     //another constructor to create a car
@@ -26,6 +31,8 @@ public class Car {
         this.make = "Toyota";
         this.model = "Camry";
         this.mileage = 0;
+        totalCars+=1;
+
     }
 
 
@@ -48,12 +55,20 @@ public class Car {
     }
 
 
+
+
     //get all stats about this car
     public String getCarDetails(){
         // String info = "Car Details \n Make: " + this.make + "\n Model: " + this.model + "\n Mileage: " + this.mileage;
 
         String info = String.format("Car Details \n Make: %s \n Model: %s \n Mileage: %s", this.make, this.model, this.mileage);
         return info;
+    }
+
+
+    //getter to get total cars ever created
+    public static int getTotalCars(){
+        return totalCars;
     }
 
 
