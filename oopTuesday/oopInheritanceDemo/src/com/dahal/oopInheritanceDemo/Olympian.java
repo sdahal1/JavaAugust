@@ -2,11 +2,11 @@ package com.dahal.oopInheritanceDemo;
 
 public class Olympian {
 	//member variables
-	public String name;
-	public String country;
-	public int numMedalsWon;
-	public int stamina;
-	public int energyLevel;
+	protected String name;
+	protected String country;
+	protected int numMedalsWon;
+	protected int stamina;
+	protected int energyLevel;
 	
 	//constructor
 	public Olympian(String nameInput, String countryInput ) {
@@ -25,6 +25,48 @@ public class Olympian {
 		
 		
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public int getNumMedalsWon() {
+		return numMedalsWon;
+	}
+
+	public void setNumMedalsWon(int numMedalsWon) {
+		this.numMedalsWon = numMedalsWon;
+	}
+
+	public int getStamina() {
+		return stamina;
+	}
+
+	public void setStamina(int stamina) {
+		this.stamina = stamina;
+	}
+
+	public int getEnergyLevel() {
+		return energyLevel;
+	}
+
+	public void setEnergyLevel(int energyLevel) {
+		this.energyLevel = energyLevel;
+	}
+	
+	
 	
 
 }

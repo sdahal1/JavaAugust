@@ -28,6 +28,12 @@ public class OlympianTest {
 		
 		lifter1.displayStats();
 		
+		
+		System.out.println(lifter1.getCountry());
+		lifter1.setCountry("Tibet");
+		
+		lifter1.displayStats();
+		
 
 	}
 
