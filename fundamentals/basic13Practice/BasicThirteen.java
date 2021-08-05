@@ -38,7 +38,7 @@ public class BasicThirteen {
         // evenNums();
 
         // System.out.println(factorial(5));
-        // System.out.println(factorial(10));
+        System.out.println(factorial(10));
 
         //create an int[] array
         int[] arr1 = {4,6,-7,12,-3};
@@ -73,8 +73,8 @@ public class BasicThirteen {
     }
 
     //factorial of 255 AKA Product of all nums to some number input (1*2*3*4*5....)
-    public static int factorial(int num){
-        int total = 1;
+    public static long factorial(int num){
+        long total = 1;
         for(int i = 1; i<= num; i++){
             // System.out.println(i);
             total*= i;

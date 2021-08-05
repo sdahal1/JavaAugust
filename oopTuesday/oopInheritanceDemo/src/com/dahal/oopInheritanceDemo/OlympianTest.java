@@ -13,6 +13,8 @@ public class OlympianTest {
 		person2.displayStats();
 		
 		
+		
+		
 		Swimmer swimmer1 = new Swimmer("Caeleb Dressel", "USA", 55);
 		
 		swimmer1.displayStats();
@@ -33,6 +35,11 @@ public class OlympianTest {
 		lifter1.setCountry("Tibet");
 		
 		lifter1.displayStats();
+		
+		
+		System.out.println("*************");
+		person1.energyLevel= 50000;
+		person1.displayStats();
 		
 
 	}

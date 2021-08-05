@@ -7,6 +7,7 @@ public class Olympian {
 	protected int numMedalsWon;
 	protected int stamina;
 	protected int energyLevel;
+	private String species;
 	
 	//constructor
 	public Olympian(String nameInput, String countryInput ) {
@@ -15,6 +16,7 @@ public class Olympian {
 		this.numMedalsWon = 0;
 		this.stamina = 30;
 		this.energyLevel = 100;
+		
 	}
 	
 	//display stats method
