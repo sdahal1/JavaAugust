@@ -25,8 +25,23 @@ var smallarray2 = [
 ]
 
 
-function matrixSearch(bigarr, smallarr){
+bigarray[2][1] == smallarray[0][0]
 
+function matrixSearch(bigarr, smallarr){
+    for(let i = 0; i < bigarr.length; i++) {
+        for (let j = 0; j < bigarr[i].length; j++) {
+
+            // if a value in bigarr equals the first value in small arr
+            if(bigarr[i][j] == smallarr[0][0]){
+
+                // compare values according to their positions
+                if(smallarr[0][1] == bigarr[i][j+1] && smallarr[1][0] == bigarr[i+1][j] && smallarr[1][1] == bigarr[i+1][j+1]){
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
 }
 
 matrixSearch(bigarray, smallarray) //true
