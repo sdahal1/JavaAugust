@@ -6,7 +6,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body onload="sendCustomAlert('${fname}')">
+	<script src="/js/appointment.js"></script>
+	
 	<h1>Thank you for submitting the form!</h1>
 	
 	<p>Here are the details about your appointment</p>

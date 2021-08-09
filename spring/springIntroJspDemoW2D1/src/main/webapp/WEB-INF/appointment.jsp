@@ -5,13 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 </head>
-<body>
+<body onload="sendCustomAlert('okayyyy den')">
+	<script src="/js/appointment.js"></script>
 	<h1>Schedule an appointment for today, which is: ${today}</h1>
 	<form action="/createAppointment" method="post">
-		<div>
+		<div class= "form-group">
 			<label for="">First Name: </label>
-			<input type="text" name="firstname" id="" />
+			<input class = "form-control" type="text" name="firstname" id="" />
 		</div>
 		<div>
 			<label for="">What do you want to talk about?</label>
@@ -26,7 +29,7 @@
 				<option value="html/css">Html/CSS</option>
 			</select>
 		</div>
-		<input type="submit" value="Make appointment!" />
+		<input class = "btn btn-success" type="submit" value="Make appointment!" />
 	</form>
 </body>
 </html>
