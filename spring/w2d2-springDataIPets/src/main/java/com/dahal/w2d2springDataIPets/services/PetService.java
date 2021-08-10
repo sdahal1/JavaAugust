@@ -31,6 +31,54 @@ public class PetService {
     }
     
     
+    //find a pet given an id
+    public Pet findOnePet(Long id) {
+    		return this.petRepository.findById(id).orElse(null);
+    		
+    		
+    		//another OPTION (haha) is to have the below code to retrieve a pet object from the database using the repository
+    		
+//    		Optional<Pet> optionalPet = this.petRepository.findById(id);
+//            if(optionalPet.isPresent()) {
+//                return optionalPet.get();
+//            } else {
+//                return null;
+//            }
+    		
+    }
+    
+    //delete a pet given an id
+    public void deletePet(Long id) {
+    		this.petRepository.deleteById(id);
+    }
+    
+    
+    //update a pet givne an id
+    public Pet updatePet(Pet p) {
+    		return this.petRepository.save(p);
+    		
+    }
+    
+    
+    //another way to update a pet
+    public Pet updatePetAnotherWay(Long id, String name, String description, Integer age) {
+    		//retrieve a pet object from the db that has that id
+    		Pet p = this.findOnePet(id);
+		System.out.println("***********");
+		System.out.println(p.getName());
+		System.out.println("***********");
+		
+		
+		//update that object
+		System.out.println(name);
+		p.setName(name);
+		p.setAge(age);
+		p.setDescription(description);
+		return this.petRepository.save(p);
+		
+}
+    
+    
     
     
     
