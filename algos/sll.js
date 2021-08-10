@@ -50,17 +50,32 @@ class SLL{
         return this
     }
 
+    reverse(){
+        let arr= [];
+        let runner = this.head;
+        while(runner!= null){
+            arr.unshift(runner.value);
+            runner = runner.next;
+        }
+        for(let i = 0; i<arr.length; i++){
+            this.addToBack(arr[i]);
+            this.removeFront()
+        }
+
+        return this
+
+    }
+
+
 }
 
 var sll1 = new SLL();
 
 sll1.addToBack(23).addToBack(15).addToBack(41).addToBack(1).display()
-sll1.removeFront().display()
+
+sll1.reverse().display()
 
 
-var sll2 = new SLL();
 
-sll2.removeFront()
-
-
+//research the arr.unshift() method
 
