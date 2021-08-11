@@ -20,19 +20,25 @@
 			<th scope="col">Name</th>
 			<th scope="col">Age</th>
 			<th scope="col">Description</th>
+			<th scope="col">Actions</th>
+
+			
 		  </tr>
 		</thead>
 		<tbody>
 		<c:forEach items='${ allPets }' var='p'>	
 		  <tr>
 			<th scope="row">${p.id}</th>
-			<td>${p.name}</td>
+			<td><a href="/pet/info/${p.id}">${p.name}</a></td>
 			<td>${p.age}</td>
 			<td>${p.description}</td>
+			<td><a href="/pet/edit/${p.id}">Edit</a> | <a href="/pet/delete/${p.id}">Delete Pet</a></td>
 		  </tr>
 		</c:forEach>
 		</tbody>
 	  </table>
+
+	  <a href="/pets/new">Add a new Pet</a>
 
 </body>
 </html>

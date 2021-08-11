@@ -26,12 +26,12 @@ public class Pet {
     
     
 	@NotNull
-    @Size(min = 3, max = 30)
+    @Size(min = 3, max = 30, message= "Name must be between 3-30 characters")
     private String name;
     
     
 	@NotNull
-    @Min(0)
+    @Min(value= 0, message = "Age is required and must be at least 0")
     private Integer age;
 	
 	//optional field for description
