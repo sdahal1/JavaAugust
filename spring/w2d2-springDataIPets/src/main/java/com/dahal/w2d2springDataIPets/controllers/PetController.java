@@ -25,11 +25,13 @@ public class PetController {
 	}
 	
 	@GetMapping("/pets")
-	public String getAllPets(Model model){
+	public String getAllPets(Model model, @ModelAttribute("pet") Pet p){
 		List<Pet> allPets = this.petService.allPets();
 		
 		model.addAttribute("allPets", allPets);
 		
+//		Pet p = new Pet();
+//		model.addAttribute("pet",p);
 		return "index.jsp";
 	}
 	
@@ -41,9 +43,11 @@ public class PetController {
 	}
 	
 	@PostMapping("/pet/create")
-	public String createPet(@Valid @ModelAttribute("pet") Pet pet, BindingResult result) {
+	public String createPet(@Valid @ModelAttribute("pet") Pet pet, BindingResult result, Model model) {
 		if(result.hasErrors()) {
-			return "newPet.jsp";
+			List<Pet> allPets = this.petService.allPets();
+			model.addAttribute("allPets", allPets);
+			return "index.jsp";
 		}
 		System.out.println(pet.getName());  //request.from[name]
 		System.out.println(pet.getDescription()); //request.form['descrioption]
