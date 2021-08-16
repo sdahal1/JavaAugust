@@ -103,9 +103,16 @@ class DLL{
         return this;
     }
 
+    reverse(){
+
+        return this;
+    }
+
+    
+
 }
 
 
 
 let dll1 = new DLL();
-dll1.addToBack(5).addToBack(23).addToBack(3).addToBack(15).addToFront(12).removeFromBack().removeFromFront().printValuesForward().printValuesBackward()
+dll1.addToBack(5).addToBack(23).addToBack(3).addToBack(15).printValuesForward().reverse().printValuesForward()
