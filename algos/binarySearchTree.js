@@ -61,6 +61,41 @@ class BST{
             this.printTree(node.right);
         }
     }
+
+    findMax(){
+        let koalabear = this.root;
+        while(koalabear.right != null){
+            koalabear = koalabear.right;
+        }
+        return koalabear.value;
+    }
+
+    findMin(){
+        let koalabear = this.root;
+        while(koalabear.left != null){
+            koalabear = koalabear.left;
+        }
+        return koalabear.value;
+    }
+
+    findMinRecursive(node){
+        var runner = node;
+        if(runner.left != null){
+            return this.findMinRecursive(runner.left)
+        }else{
+            console.log(runner.value)
+            return runner.value;
+        }
+    }
+    findMaxRecursive(node){
+        var runner = node;
+        if(runner.right != null){
+            return this.findMaxRecursive(runner.right)
+        }else{
+            console.log(runner.value)
+            return runner.value;
+        }
+    }
 }
 
 
@@ -68,3 +103,7 @@ let bst1 = new BST();
 
 bst1.add(23).add(15).add(12).add(28).add(27)
 bst1.printTree(bst1.root)
+// console.log(bst1.findMin())
+bst1.findMinRecursive(bst1.root)
+bst1.findMaxRecursive(bst1.root)
+
