@@ -1,5 +1,6 @@
-package com.dahal.w3d2loginregistration.controllers;
+package com.dahal.w3d4beltreviewer.controllers;
 
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -13,15 +14,20 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.dahal.w3d2loginregistration.models.LoginUser;
-import com.dahal.w3d2loginregistration.models.User;
-import com.dahal.w3d2loginregistration.services.UserService;
+import com.dahal.w3d4beltreviewer.models.LoginUser;
+import com.dahal.w3d4beltreviewer.models.Meal;
+import com.dahal.w3d4beltreviewer.models.User;
+import com.dahal.w3d4beltreviewer.services.MealService;
+import com.dahal.w3d4beltreviewer.services.UserService;
 
 @Controller
 public class HomeController {
 	
 	@Autowired
 	private UserService userServ;
+	
+	@Autowired
+	private MealService mealServ;
 	
 	
 //	@GetMapping("/")
@@ -87,6 +93,13 @@ public class HomeController {
 //		System.out.println(loggedInUser);
 		model.addAttribute("loggedInUser", loggedInUser);
 		
+		
+		//ask the service to get all the meals and put it in a variable
+		List<Meal> allMeals = this.mealServ.findAllMeals();
+		
+		//pass that variable to the template
+		model.addAttribute("allMeals", allMeals);
+		
 		return "home.jsp";
 	}
 	
@@ -99,6 +112,48 @@ public class HomeController {
 	
 	
 	
+	
+	
+	//show form to create a new meal with
+	@GetMapping("/meals/new")
+	public String newMeal(@ModelAttribute("meal") Meal meal) {
+		
+		return "newMeal.jsp";
+	}
+	
+	//form submits to this route to create a new meal object
+	@PostMapping("/meals/create")
+	public String createMeal(@Valid @ModelAttribute("meal") Meal meal, BindingResult result, HttpSession session) {
+		if(result.hasErrors()) {
+			return "newMeal.jsp";
+		}
+		
+		
+		System.out.println(meal.getName());
+		System.out.println(meal.getDescription());
+		System.out.println(meal.getUploader());
+		
+		//get the logged in user. first the id of the logged in user is in session, so lets get that (use session!!)
+		Long idOfLoggedInUser = (Long)session.getAttribute("user_id");
+		
+		//after we have the id of the logged in user, we can get the whole logged in user object using that id
+		User loggedInUserObj = this.userServ.findUser(idOfLoggedInUser);
+		
+		
+		//set the meals uploader to be that loggedin user object
+		meal.setUploader(loggedInUserObj);
+		
+
+		this.mealServ.createMeal(meal);
+		
+		
+		
+		return "redirect:/home";
+	}
+	
+	
+	
 	 
 
 }
+
