@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -150,6 +151,81 @@ public class HomeController {
 		
 		return "redirect:/home";
 	}
+	
+	@GetMapping("/meal/info/{id}")
+	public String showMealInfo(@PathVariable("id")Long id, Model model) {
+		//get a meal from the db using the service
+		Meal mealobj = this.mealServ.getMeal(id);
+		//pass the meal object to the templates
+		model.addAttribute("mealobj",mealobj);
+		
+		
+		return "mealinfo.jsp";
+	}
+	
+	
+	@GetMapping("/meal/{id}/edit")
+	public String editMeal(@PathVariable("id") Long id, Model model) {
+		//get a meal object that has the id from the route so that we can send that to the form to pre populate the edit form with info about that meal
+		Meal mealobj = this.mealServ.getMeal(id);
+		
+		//pass the meal object to the form
+		model.addAttribute("mealobj", mealobj);
+		
+
+		return "editMeal.jsp";
+	}
+	
+	@PostMapping("/meals/{id}/update")
+	public String updateMeal(@PathVariable("id") Long id, @Valid @ModelAttribute("mealobj") Meal meal, BindingResult result, HttpSession session) {
+		if(result.hasErrors()) {
+			return "editMeal.jsp";
+		}else {
+			//get the meal object we want to update from the form 
+			System.out.println("**********");
+			System.out.println(meal.getName());
+			System.out.println(meal.getDescription());
+			System.out.println(meal.getId());
+			System.out.println(meal.getUploader());
+			
+			//get the logged in user id using session key user_id
+			Long loggedinUserId = (Long) session.getAttribute("user_id");
+			
+			//get the logged in user OBJECT!!! using the id from session
+			User loggedInUserOBJECT = this.userServ.findUser(loggedinUserId);
+			
+			//assign the meal's uploader to be the logged in user
+			meal.setUploader(loggedInUserOBJECT);
+//			meal.setId(id);
+			
+			//pass the meal object to the service to update the db with
+			this.mealServ.updateMeal(meal);
+			System.out.println("**********");
+			
+			
+			
+		}
+		
+		
+		
+		
+		return "redirect:/home";
+	}
+	
+	@GetMapping("/delete/{id}")
+	public String deleteMeal(@PathVariable("id") Long id) {
+		
+		this.mealServ.deleteMeal(id);
+		
+		
+		
+		return "redirect:/home";
+	}
+	
+	
+	
+	
+	
 	
 	
 	

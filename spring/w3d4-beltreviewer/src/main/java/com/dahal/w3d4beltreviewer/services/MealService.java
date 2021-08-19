@@ -28,4 +28,17 @@ public class MealService {
 	}
 	
 	
+	public Meal getMeal(Long id) {
+		return this.mealRepo.findById(id).orElse(null);
+	}
+	
+	public Meal updateMeal(Meal meal) {
+		return this.mealRepo.save(meal);
+	}
+	
+	
+	public void deleteMeal(Long id) {
+		this.mealRepo.deleteById(id);
+	}
+	
 }

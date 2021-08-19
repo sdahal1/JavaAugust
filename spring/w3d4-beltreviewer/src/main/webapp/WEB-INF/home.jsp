@@ -28,9 +28,9 @@
 				<c:forEach items='${ allMeals }' var='meal'>
 					<tr>
 						<th scope="row">${meal.id}</th>
-						<td>${meal.name}</td>
+						<td><a href="/meal/info/${meal.id}">${meal.name}</a></td>
 						<td>${meal.uploader.userName}</td>
-						<td><a href="">Edit</a> || <a href="">Delete</a></td>
+						<td><a href="/meal/${meal.id}/edit">Edit</a> || <a href="/delete/${meal.id}">Delete</a></td>
 					</tr>
 				</c:forEach>
 			 
