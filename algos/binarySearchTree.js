@@ -140,6 +140,11 @@ class BST{
         }
 
     }
+
+
+    height(node){
+
+    }
 //recursiveContains(12, node(23))
     //recursiveContains(12, node(15))
         //recursiveContains(12, node(12))
@@ -169,6 +174,7 @@ bst1.findMinRecursive(bst1.root)
 bst1.findMaxRecursive(bst1.root)
 
 console.log(bst1.size(bst1.root))
+bst1.height(bst1.root);
 
 
 

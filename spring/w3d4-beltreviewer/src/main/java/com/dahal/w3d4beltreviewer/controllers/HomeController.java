@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,20 @@ import com.dahal.w3d4beltreviewer.models.Meal;
 import com.dahal.w3d4beltreviewer.models.User;
 import com.dahal.w3d4beltreviewer.services.MealService;
 import com.dahal.w3d4beltreviewer.services.UserService;
+
+
+//api related
+import java.net.URLEncoder;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
+
+import kong.unirest.json.JSONArray;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 @Controller
 public class HomeController {
@@ -201,13 +216,8 @@ public class HomeController {
 			//pass the meal object to the service to update the db with
 			this.mealServ.updateMeal(meal);
 			System.out.println("**********");
-			
-			
-			
+				
 		}
-		
-		
-		
 		
 		return "redirect:/home";
 	}
@@ -216,11 +226,57 @@ public class HomeController {
 	public String deleteMeal(@PathVariable("id") Long id) {
 		
 		this.mealServ.deleteMeal(id);
-		
-		
-		
+
 		return "redirect:/home";
 	}
+	
+	
+	
+	
+//	@GetMapping("/testCoins")
+//	public String testCoins(Model model) throws Exception{
+//		//get info from the api
+//		// Host url
+//	      String host = "https://newsapi.org/v2/everything?q=tesla&from=2021-07-24&sortBy=publishedAt&apiKey=dc3063ef0bce4718a88a3ac000ec7448";
+//	      String charset = "UTF-8";
+//	      // Headers for a request
+//	      //String x_rapidapi_host = "movie-database-imdb-alternative.p.rapidapi.com";
+//	      //String x_rapidapi_key = <YOUR_RAPIDAPI_KEY>;//Type here your key
+//	      // Params
+//	      //String s = "Pulp";
+//	  // Format query for preventing encoding problems
+//	      //String query = String.format("s=%s",
+//	       //URLEncoder.encode(s, charset));
+//		
+//	      
+//	      System.out.println("****************");
+//	      HttpResponse <JsonNode> response = Unirest.get(host).asJson();
+//	      System.out.println("****************");
+//	      System.out.println(response.getStatus());
+//	      System.out.println(response.toString());
+//	      
+//	   // retrieve the parsed JSONObject from the response
+//	      org.json.JSONObject myObj = response.getBody().getObject();
+//	      org.json.JSONArray x = myObj.getJSONArray("articles");
+//	      
+////	      Gson gson = new GsonBuilder().setPrettyPrinting().create();
+////	      JsonParser jp = new JsonParser();
+////	      JsonElement je = jp.parse(response.getBody().toString());
+////	      String prettyJsonString = gson.toJson(je);
+////	      System.out.println(prettyJsonString);
+//	      
+//	      
+//	      
+//	      
+//	      
+//	      
+//		//pass the info to the template
+//	      model.addAttribute("info", response.getBody().getObject());
+//	      model.addAttribute("articles", x);
+//		return "coin.jsp";
+//	}
+	
+	
 	
 	
 	
