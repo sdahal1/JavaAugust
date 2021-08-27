@@ -70,22 +70,57 @@ class TrieSet{
         }
     }
 
+    autoComplete(str){
+        //find if the sequence of the inputstring is even present in our trieset
+        let runner = this.root;
+        //purpose of this forloop is to get us into the last letter of the input string in our trieset to see what words exist from that point forward
+        for(let i = 0; i< str.length; i++){
+            //if the current node's children ccontains the letter from the autocomplete input string
+            if(!runner.children.hasOwnProperty(str[i])){
+                return [];
+            }
+            //if the key does exist, move runner to that node containing that letter
+            runner = runner.children[str[i]]
+        }
+
+        const helperFunction = (node, newStr, arr)=>{
+            //base case
+            if(node.isWord){
+                arr.push(newStr);
+            }
+            //recursive case with forward progress
+            for(let key in node.children){
+                arr = helperFunction(node.children[key], newStr+key, arr);
+            }
+            return arr;
+        }
+
+        return helperFunction(runner, str, [])
+        
+    }
+
+
 
 }
 
 
 
-//this.printAllWords(node.children[a], "a" );
-    //this.printAllWords(node.children[p], "ap" );
-        //this.printAllWords(node.children[e], "ape" );
-            //console.log("ape")
-        //this.printAllWords(node.children[p], "app" );
-            //this.printAllWords(node.children[l], "appl" );
-                //this.printAllWords(node.children[e], "apple" );
-                    //console.log("apple")
+//setOfWords.autoComplete("ap")
+    //helperFunction(runner(p), "ap", [])
+        //arr = helperFunction(node.children[e], "ape", []); --> ["ape"]
 
-//this.printAllWords(node.children[d], "d" );
-//this.printAllWords(node.children[c], "c" );
+        //arr = helperFunction(node.children[p], "app", ["ape"]);
+            //1st iteration->arr = helperFunction(node.children["l"], "appl", ["ape"]);
+                //arr = helperFunction(node.children["e"], "apple", ["ape"]); --> ["ape", "apple"]
+                //arr = helperFunction(node.children["i"], "appli", ["ape", "apple"]);
+                    //arr = helperFunction(node.children["c"], "applic", ["ape", "apple"]);
+                        //arr = helperFunction(node.children["a"], "applica", ["ape", "apple"]);
+                            //arr = helperFunction(node.children["t"], "applicat", ["ape", "apple"]);
+                                //arr = helperFunction(node.children["i"], "applicati", ["ape", "apple"]);
+                                    //arr = helperFunction(node.children["o"], "applicatio", ["ape", "apple"]);
+                                        ////arr = helperFunction(node.children["n"], "application", ["ape", "apple"]); --> ["ape", "apple", "application"]
+            //2nd iteration->arr = helperFunction(node.children["e"], "appe", ["ape", "apple", "application"]);
+                //["ape", "apple", "application", "appearance"]
 
 
 
@@ -95,17 +130,22 @@ var setOfWords = new TrieSet();
 
 setOfWords.add("ape");
 setOfWords.add("apple");
+setOfWords.add("application");
+setOfWords.add("appearance");
 setOfWords.add("dog");
 setOfWords.add("cat");
-setOfWords.add("pie")
 
-setOfWords.printAllWords(setOfWords.root, "");
+console.log(setOfWords.autoComplete("ap")) //["ape", "apple", "application", "appearance"]
+console.log(setOfWords.autoComplete("app")) //["apple", "appearance", "application"]
+console.log(setOfWords.autoComplete("po")) //[]
 
-// setOfWords.add("are");
-console.log(setOfWords.contains("ape")) //true
-console.log(setOfWords.contains("apeee")) //false
-console.log(setOfWords.contains("appl")) //false
-console.log(setOfWords.contains("potato")) //false
+// setOfWords.printAllWords(setOfWords.root, "");
+
+// // setOfWords.add("are");
+// console.log(setOfWords.contains("ape")) //true
+// console.log(setOfWords.contains("apeee")) //false
+// console.log(setOfWords.contains("appl")) //false
+// console.log(setOfWords.contains("potato")) //false
 
 
 
